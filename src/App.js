@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import LoginPage from "./pages/login.page";
+import HomePage from "./pages/home.page";
+import SignupPage from "./pages/signup.page";
 
-function App() {
+const App = ({ isSignedIn }) => {
+  const PrivateRoute = (props) => {
+    return isSignedIn ? <Route {...props} /> : <Redirect to="/login" />;
+  };
+
+  const PublicRoute = (props) => {
+    return isSignedIn ? <Redirect to="/" /> : <Route {...props} />;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <PrivateRoute path="/" exact component={HomePage} />
+      <PublicRoute path="/login" exact component={LoginPage} />
+      <PublicRoute path="/signup" exact component={SignupPage} />
+    </Switch>
   );
-}
+};
 
 export default App;
