@@ -2,11 +2,19 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import workIcon from "./../assets/work-desk.svg";
 
 const OuterContainer = styled.div`
   position: relative;
   height: 100vh;
   width: 100%;
+  @media screen and (min-width: 800px) {
+    display: flex;
+    align-items: center;
+    & > div {
+      width: 50%;
+    }
+  }
 `;
 
 const Container = styled.div`
@@ -87,6 +95,43 @@ const Container = styled.div`
       color: #3175dc;
     }
   }
+  @media screen and (min-width: 800px) {
+    align-self: flex-start;
+  }
+`;
+
+const IllustrationContainer = styled.div`
+  @media screen and (max-width: 799px) {
+    display: none;
+  }
+  overflow: hidden;
+  background: #2157a7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  padding: 80px;
+  position: relative;
+  p {
+    color: white;
+    align-self: center;
+    width: 280px;
+    font-size: 1.4rem;
+    position: relative;
+    z-index: 1;
+  }
+  img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 600px;
+  }
+  @media screen and (min-width: 1000px) {
+    img {
+      bottom: -100px;
+    }
+  }
 `;
 
 const SignupPage = () => {
@@ -134,6 +179,18 @@ const SignupPage = () => {
           Already have an account? <Link to="/login">Sign In</Link>
         </p>
       </Container>
+      <IllustrationContainer>
+        <p>
+          A one stop shop for all remote workers. Become more efficient with
+          PMer.
+        </p>
+        <p>
+          Everything you need to keep you focused while you work, all in one
+          place.
+        </p>
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
+        <img src={workIcon} />
+      </IllustrationContainer>
     </OuterContainer>
   );
 };
